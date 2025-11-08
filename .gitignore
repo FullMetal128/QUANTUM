@@ -21,4 +21,4 @@ dist/
 # Контрольные точки в Jupyter notebook лучше оставить в стороне
 .ipynb_checkpoints
 
-privat_file
+private_files/private_file.env
