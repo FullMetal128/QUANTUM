@@ -24,7 +24,7 @@ else:
     prog << measure(0, 0) << measure(1, 1) << measure(2, 2)
 
 # Step 4: Run the program on the simulator for one shot and get result
-qvm.run(prog, shots=1)
+qvm.run(prog, shots=10)
 result_bits = list(qvm.result().get_counts().keys())[0]  # e.g., "000" or "111"
 print(f"Measurement result = {result_bits} (basis = {'Z' if basis_is_Z else 'X'})")
 

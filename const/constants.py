@@ -1,7 +1,14 @@
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path='../private_files/private_file.env')
+local_path = Path('../private_files/private_file.env')
+current_parent_path = Path(__file__).parent
+global_path = (current_parent_path / local_path).resolve()
 
-QUANTUM_TOKEN_API = os.getenv("QUANTUM_TOKEN")
+load_dotenv(global_path)
+
+
+QUANTUM_TOKEN_API = os.environ.get("QUANTUM_TOKEN")
+
 
