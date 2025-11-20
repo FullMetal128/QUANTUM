@@ -11,4 +11,3 @@ load_dotenv(global_path)
 
 QUANTUM_TOKEN_API = os.environ.get("QUANTUM_TOKEN")
 
-

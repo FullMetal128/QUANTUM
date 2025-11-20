@@ -1,6 +1,6 @@
 from pyqpanda3.core import QCircuit, QProg, H, CNOT, measure, CPUQVM
 import random
-
+# good
 # Initialize quantum virtual machine (CPU simulator)
 qvm = CPUQVM()
 
