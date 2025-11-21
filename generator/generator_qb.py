@@ -18,8 +18,8 @@ qvm = CPUQVM()
 qvm.run(generate_quantum(), 1024)
 rez = qvm.result().get_prob_dict()
 print(rez)
-print(f'{sqrt(rez["0"])} ∣0⟩ + {sqrt(rez["1"])} ∣1⟩')
-assert rez["0"] + rez["1"] == 1
+print(f'{sqrt(rez["00"])} ∣0⟩ + {sqrt(rez["11"])} ∣1⟩')
+assert rez["00"] + rez["11"] == 1
 
 
 
