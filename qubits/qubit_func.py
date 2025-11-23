@@ -30,9 +30,28 @@ class PublicQbit:
         self.circuit << RY(self.id, math.radians(-theta)) # θ влияет на P(0)/P(1) в Z
         print("Выполнен обратный спин на публичном кубите с id: "+str(self.id))
 
+#Создание массива приватных кубитов с рандомными углами
+def generate_random_private_qbits(number_of_qbits_in_token):
+    resultArray = []
+    for i in range(number_of_qbits_in_token):
+        privateQbit = PrivateQbit(i+1, get_random_theta(), get_random_phi())
+        resultArray.append(privateQbit)
+    return resultArray
+
 #Функции для генерации рандомных углов тета и фи
-def getRandomTheta():
+def get_random_theta():
     return random.uniform(0, 180)
 
-def getRandomPhi():
+def get_random_phi():
     return random.uniform(0, 360)
+
+#Функция для измерения состояния кубита
+def measure_qbit(simulator, qbit, number_of_measures_of_single_qbit):
+    program = QProg() << qbit.circuit << measure(qbit.id, 0)    #qbit.id)
+    simulator.run(program, number_of_measures_of_single_qbit)
+    result = simulator.result().get_counts()
+    #print("Кубит с id "+str(qbit.id))
+    #print(result)
+    ones = result.get('1', 0)
+    #print("Количество единиц:", ones)
+    return result
