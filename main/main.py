@@ -3,6 +3,7 @@ from qubits.qubit_func import *
 simulator = CPUQVM()
 number_of_qubits = 2
 shots = 10000
+numberOfMeasuresOfSingleQbit = 10000
 
 #Создаем приватные кубиты
 privateQbitsArray = generate_random_private_qbits(number_of_qbits_in_token=number_of_qubits)
@@ -15,4 +16,14 @@ for el in privateQbitsArray:
     print("  Id дочернего публичного кубита:", str(el.publicQbit.id))
     print(measure_qbit(simulator, el, number_of_measures_of_single_qbit=shots))
     print("*********************")
+print("")
+
+#Создаем массив публичных кубитов на основе приватных
+publicQbitsArray = make_public_qbits_array(privateQbitsArray)
+print("\nПубличные кубиты:")
+for el in publicQbitsArray:
+    print("___________")
+    print("Кубит №", str(el.id))
+    print(measureQbit(simulator, el, numberOfMeasuresOfSingleQbit))
+    print("___________")
 print("")

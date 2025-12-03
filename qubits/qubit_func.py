@@ -38,7 +38,7 @@ def generate_random_private_qbits(number_of_qbits_in_token):
         resultArray.append(privateQbit)
     return resultArray
 
-#Функции для генерации рандомных углов тета и фи
+#Функции для генерации случайных углов тета и фи
 def get_random_theta():
     return random.uniform(0, 180)
 
@@ -49,6 +49,24 @@ def get_random_phi():
 def measure_qbit(simulator, qbit, number_of_measures_of_single_qbit):
     program = QProg() << qbit.circuit << measure(qbit.id, 0)    #qbit.id)
     simulator.run(program, number_of_measures_of_single_qbit)
+    result = simulator.result().get_counts()
+    #print("Кубит с id "+str(qbit.id))
+    #print(result)
+    ones = result.get('1', 0)
+    #print("Количество единиц:", ones)
+    return result
+
+#Создание массива публичных кубитов на основе приватных
+def make_public_qbits_array(private_qbits_array):
+    public_qbits_array = []
+    for privateQbit in private_qbits_array:
+        public_qbits_array.append(privateQbit.publicQbit)
+    return public_qbits_array
+
+#Функция для измерения состояния кубита
+def measureQbit(simulator, qbit, numberOfMeasuresOfSingleQbit):
+    programm = QProg() << qbit.circuit << measure(qbit.id, 0)    #qbit.id)
+    simulator.run(programm, numberOfMeasuresOfSingleQbit)
     result = simulator.result().get_counts()
     #print("Кубит с id "+str(qbit.id))
     #print(result)
