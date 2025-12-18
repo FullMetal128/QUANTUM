@@ -49,10 +49,12 @@ class MainWindow(QWidget):
         buttons = QHBoxLayout()
         self.btn_gen_private = QPushButton("1) Сгенерировать приватные кубиты")
         self.btn_gen_public = QPushButton("2) Сгенерировать публичный токен")
+        self.btn_clear_log = QPushButton("Очистить лог")
         self.btn_check = QPushButton("3) Проверить токен")
 
         buttons.addWidget(self.btn_gen_private)
         buttons.addWidget(self.btn_gen_public)
+        buttons.addWidget(self.btn_clear_log)
         buttons.addWidget(self.btn_check)
         layout.addLayout(buttons)
 
@@ -63,6 +65,7 @@ class MainWindow(QWidget):
         # Сигналы
         self.btn_gen_private.clicked.connect(self.generate_private)
         self.btn_gen_public.clicked.connect(self.generate_public_token)
+        self.btn_clear_log.clicked.connect(self.clear_log)
         self.btn_check.clicked.connect(self.check_token)
 
         # Изначально нельзя генерировать public/check без private
@@ -71,6 +74,9 @@ class MainWindow(QWidget):
 
     def write(self, text: str):
         self.log.append(text)
+
+    def clear_log(self):
+        self.log.clear()
 
     def generate_private(self):
         n = self.qubits_spin.value()
