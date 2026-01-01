@@ -71,7 +71,7 @@ class BenchmarkWorker(QObject):
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Qubit Token GUI (PySide6)")
+        self.setWindowTitle("Qubit Token")
 
         # Состояние приложения
         self.simulator = CPUQVM()
@@ -117,7 +117,7 @@ class MainWindow(QWidget):
 
         # ---- Лейбл времени/кубитов ----
         time_layout = QHBoxLayout()
-        self.generation_time_label = QLabel("⏱ Токен: — кубитов | Время генерации: —")
+        self.generation_time_label = QLabel("Токен: — кубитов | Время генерации: —")
         self.generation_time_label.setAlignment(Qt.AlignLeft)
         self.generation_time_label.setStyleSheet("""
             QLabel {
@@ -128,7 +128,7 @@ class MainWindow(QWidget):
         """)
 
         self.check_time_label = QLabel(
-            "🔍 Время проверки токена: —"
+            "Время проверки токена: —"
         )
         self.check_time_label.setAlignment(Qt.AlignLeft)
         self.check_time_label.setStyleSheet("""
@@ -145,9 +145,9 @@ class MainWindow(QWidget):
 
         # ---- Кнопки (ручной режим) ----
         buttons = QHBoxLayout()
-        self.btn_gen_private = QPushButton("1) Сгенерировать приватные кубиты")
-        self.btn_gen_public = QPushButton("2) Сгенерировать публичный токен")
-        self.btn_check = QPushButton("3) Проверить токен")
+        self.btn_gen_private = QPushButton("Сгенерировать приватные кубиты")
+        self.btn_gen_public = QPushButton("Сгенерировать публичный токен")
+        self.btn_check = QPushButton("Проверить токен")
         self.btn_clear_log = QPushButton("Очистить лог")
 
         buttons.addWidget(self.btn_gen_private)
@@ -281,8 +281,8 @@ class MainWindow(QWidget):
     def generate_private(self):
         n = self.qubits_spin.value()
         shots = self.shots_spin.value()
-        self.check_time_label.setText("🔍 Время проверки токена: —")
-        self.generation_time_label.setText("⏱ Токен: — кубитов | Время генерации: —")
+        self.check_time_label.setText("Время проверки токена: —")
+        self.generation_time_label.setText("Токен: — кубитов | Время генерации: —")
 
         self.write("=== Генерация приватных кубитов ===")
         self.privateQbitsArray = generate_random_private_qbits(number_of_qbits_in_token=n)
@@ -290,7 +290,7 @@ class MainWindow(QWidget):
         self.write("Приватные кубиты:")
         for el in self.privateQbitsArray:
             self.write("*********************")
-            self.write(f"Кубит № {el.id}")
+            self.write(f"  Кубит № {el.id}")
             self.write(f"  Тета: {el.theta}")
             self.write(f"  Фи: {el.phi}")
             self.write(f"  Id дочернего публичного кубита: {el.public_qbit.id}")
